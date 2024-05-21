@@ -8,7 +8,7 @@
 
 .card {
     flex: 0 0 auto; /* Esto hace que las tarjetas no se encojan y mantengan su tamaño */
-    margin-right: 10px; /* Espacio entre tarjetas */
+    margin-right: 10px; 
 }
 
 .card-img-top {

@@ -1,17 +1,3 @@
-/* import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-
-export const DetailsStarships = () => {
-    const { store, actions } = useContext(Context);
-    return (
-        <>
-        <div>
-             <h1>Details Starships</h1>
-        </div>
-        </>
-    );
-}; */
-
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from 'react-router-dom';

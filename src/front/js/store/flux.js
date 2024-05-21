@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Characters: [],
 			Planets: [],
 			Starships: [],
+			Fav: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -80,6 +81,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//Results[0].url
 
 			},
+			favorites: (newFav) => {
+				const store = getStore();
+				if(store.Fav.includes(newFav)) {
+					setStore({Fav: store.Fav.filter( (repeated) => repeated != newFav)}); //sacarlo si está repetido
+				} else {
+					setStore({Fav:[...store.Fav, newFav]}); //añadirlo si no está a la lista que ya hay de favoritos
+				}
+			},
+
+			changeColor: (color) => {
+				const store = getStore();
+				if (store.Fav.includes(color)) {
+					return true;  // El color está en la lista de favoritos
+				} else {
+					return false; // El color no está en la lista de favoritos
+				}
+			}
 		}
 	};
 };

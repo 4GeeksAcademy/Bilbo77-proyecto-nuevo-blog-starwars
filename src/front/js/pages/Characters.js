@@ -21,7 +21,8 @@ export const Characters = () => {
                                 <Link to={'DetailsCharacters/' + index}>
                                     <button className="btn btn-primary">Learn more</button>
                                 </Link>
-                                <i className="fa-solid fa-heart-circle-plus float-end fa-lg pt-3"></i>
+                                <i onClick={() => actions.favorites(item.name)} className="fa-solid fa-heart-circle-plus float-end fa-lg pt-3
+                                '(store.Fav.includes(color))' ? text-success : text-danger"></i>
                             </div>
                         </div>
                     )}
