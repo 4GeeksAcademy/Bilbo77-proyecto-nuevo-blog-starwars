@@ -44,7 +44,7 @@ const Layout = () => {
                         <Route element={<DetailsStarships />} path="/detailsstarships/:nave" />
                         <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
-                    {/* <Footer /> */}
+                    <Footer /> 
                 </ScrollToTop>
             </BrowserRouter>
         </div>
