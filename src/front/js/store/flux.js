@@ -13,7 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			Characters: [],
+			Planets: [],
+			Starships: [],
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -22,31 +25,61 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getMessage: async () => {
-				try{
+				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
+					const data = await resp.text()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			getCharacters: async () => {
+				const uri = "https://swapi.dev/api" + "/people"
+				const response = await fetch(uri);
+				if (!response.ok) {
+					// Aquí manejamos el error que devolvió el request HTTP 
+					console.log('error: ', response.status, response.statusText);
+					return { error: { status: response.status, statusText: response.statusText } };
+				};
+				const data = await response.json();
+				console.log(data)
+				// De aquí en adelante es la lógica que está en flux
+				setStore({ Characters: data.results });
+			},
+			
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			getPlanets: async () => {
+				const uri = "https://swapi.dev/api" + "/planets"
+				const response = await fetch(uri);
+				if (!response.ok) {
+					// Aquí manejamos el error que devolvió el request HTTP 
+					console.log('error: ', response.status, response.statusText);
+					return { error: { status: response.status, statusText: response.statusText } };
+				};
+				const data = await response.json();
+				console.log(data)
+				// De aquí en adelante es la lógica que está en flux
+				setStore({ Planets: data.results });
+			},
+			getStarships: async () => {
+				const uri = "https://swapi.dev/api" + "/starships"
+				const response = await fetch(uri);
+				if (!response.ok) {
+					// Aquí manejamos el error que devolvió el request HTTP 
+					console.log('error: ', response.status, response.statusText);
+					return { error: { status: response.status, statusText: response.statusText } };
+				};
+				const data = await response.json();
+				console.log(data)
+				// De aquí en adelante es la lógica que está en flux
+				setStore({ Starships: data.results });
+				//Results[0].url
+
+			},
 		}
 	};
 };

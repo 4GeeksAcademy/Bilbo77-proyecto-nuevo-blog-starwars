@@ -1,0 +1,30 @@
+/* styles.css */
+.scroll-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.card {
+    flex: 0 0 auto; /* Esto hace que las tarjetas no se encojan y mantengan su tamaño */
+    margin-right: 10px; /* Espacio entre tarjetas */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.character-image {
+    width: 400px;
+    height: auto;
+    object-fit: cover; 
+}
+
+.block {
+    width: 200px; 
+    margin: 10px;
+    text-align: center; 
+}

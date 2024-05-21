@@ -9,7 +9,14 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
-import { Footer } from "./component/footer";
+import { Characters } from "./pages/Characters";
+import { Planets } from "./pages/Planets";
+import { Starships } from "./pages/Starships";
+
+import { DetailsCharacters } from "./pages/DetailsCharacters";
+import { DetailsPlanets } from "./pages/DetailsPlanets";
+import { DetailsStarships } from "./pages/DetailsStarships";
+
 
 //create your first component
 const Layout = () => {
@@ -17,7 +24,7 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
@@ -27,10 +34,15 @@ const Layout = () => {
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
+                        <Route element={<Characters />} path="/characters" />
+                        <Route element={<Planets />} path="/planets" />
+                        <Route element={<Starships />} path="/starships" />
                         <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<h1>Not found!</h1>} />
+                        <Route element={<DetailsCharacters />} path="/detailscharacters/:personaje" />
+                        <Route element={<DetailsPlanets />} path="/detailsplanets/:planeta" />
+                        <Route element={<DetailsStarships />} path="/detailsstarships/:nave" />
+                        <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
-                    <Footer />
                 </ScrollToTop>
             </BrowserRouter>
         </div>
