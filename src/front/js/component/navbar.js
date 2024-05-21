@@ -14,7 +14,7 @@ export const Navbar = () => {
 			</Link>
 			<div>
                 <div className="btn-group botonFav">
-                    <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button type="button" className="btn orange-btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Favorites {store.Fav.length}
                     </button>
                     <ul className="dropdown-menu">

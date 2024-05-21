@@ -7,7 +7,7 @@ export const Characters = () => {
     const { store, actions } = useContext(Context);
     return (
         <>
-            <h1 className="text-center">Characters</h1>
+            <h1 className="text-center jumping-text">Characters</h1>
             {!store.Characters ? 'Leyendo'
                 :
                 <div className="scroll-container">
@@ -19,10 +19,13 @@ export const Characters = () => {
                                 <p className="card-text">Gender: {item.gender}</p>
                                 <p className="card-text">Mass: {item.mass}</p>
                                 <Link to={'DetailsCharacters/' + index}>
-                                    <button className="btn btn-primary">Learn more</button>
+                                    <button className="btn orange-btn">Learn more</button>
                                 </Link>
-                                <i onClick={() => actions.favorites(item.name)} className="fa-solid fa-heart-circle-plus float-end fa-lg pt-3
-                                '(store.Fav.includes(color))' ? text-success : text-danger"></i>
+                                <span onClick={() => actions.favorites(item.name)}>
+                                {actions.changeColor(item.name)?<i className="fa-solid fa-heart-circle-minus float-end fa-lg pt-3 text-danger "></i>
+                                :
+                                <i className="fa-solid fa-heart-circle-plus float-end fa-lg pt-3 text-success"></i>}
+                                </span>
                             </div>
                         </div>
                     )}

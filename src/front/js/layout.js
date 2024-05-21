@@ -9,6 +9,7 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
+import { Footer } from "./component/footer";
 import { Characters } from "./pages/Characters";
 import { Planets } from "./pages/Planets";
 import { Starships } from "./pages/Starships";
@@ -43,6 +44,7 @@ const Layout = () => {
                         <Route element={<DetailsStarships />} path="/detailsstarships/:nave" />
                         <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
+                    {/* <Footer /> */}
                 </ScrollToTop>
             </BrowserRouter>
         </div>

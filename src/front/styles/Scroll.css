@@ -1,5 +1,4 @@
-/* styles.css */
-.scroll-container {
+.scroll-container {     /* el scroll horizontal */
     display: flex;
     overflow-x: auto;
     padding: 10px;
@@ -8,7 +7,7 @@
 
 .card {
     flex: 0 0 auto; /* Esto hace que las tarjetas no se encojan y mantengan su tamaño */
-    margin-right: 10px; 
+    margin-right: 30px; 
 }
 
 .card-img-top {
@@ -23,8 +22,87 @@
     object-fit: cover; 
 }
 
-.block {
+.block {               /* las 7 características de cada detail */
     width: 200px; 
     margin: 10px;
     text-align: center; 
 }
+
+body {
+    background-color: gray;
+}
+
+.star-wars-font {
+    font-family: 'Star Jedi', sans-serif; /* los párrafos de los details */
+}
+
+.orange-btn {
+    background-color: orange;
+    border-radius: 20px; /* botones de learn more */
+    padding: 10px 20px; 
+    border: none; 
+    color: red; 
+}
+
+.card-title {
+    border-radius: 10px; /* titulos de las cards (item.name)*/
+    box-shadow: 0 0 10px orange; 
+    color:red; 
+    padding: 10px; 
+}
+
+
+/* todo con chatGPT, el título de Planets*/
+@keyframes shimmer {
+    0% {
+        text-shadow: 0 0 5px purple, 0 0 10px purple, 0 0 15px purple, 0 0 20px purple, 0 0 25px purple, 0 0 30px purple, 0 0 35px purple;
+    }
+    100% {
+        text-shadow: none;
+    }
+}
+
+.shimmering {
+    animation: shimmer 1.5s infinite alternate;
+    color: purple;
+}
+
+/* todo con chatGPT, el título de Characters*/
+@keyframes jump {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  
+  .jumping-text {
+    display: inline-block;
+    animation: jump 0.5s infinite alternate; /* La animación alterna entre el estado inicial y el estado final */
+    color: purple;
+  }
+  
+  /* todo con chatGPT, el título de Starships*/
+  @keyframes glowing {
+    0% {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+    }
+    50% {
+      text-shadow: none;
+    }
+    100% {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+    }
+  }
+  
+  .glowing-title {
+    animation: glowing 2s infinite alternate; 
+    color:  purple; 
+    text-align: center; 
+  }
+  
+  

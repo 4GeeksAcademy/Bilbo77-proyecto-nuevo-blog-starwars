@@ -90,13 +90,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			changeColor: (color) => {
+			changeColor: (pers) => {
 				const store = getStore();
-				if (store.Fav.includes(color)) {
-					return true;  // El color está en la lista de favoritos
-				} else {
-					return false; // El color no está en la lista de favoritos
-				}
+				return store.Fav.includes(pers);
 			}
 		}
 	};
