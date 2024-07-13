@@ -19,6 +19,7 @@ import { DetailsPlanets } from "./pages/DetailsPlanets";
 import { DetailsStarships } from "./pages/DetailsStarships";
 import { Login } from "./pages/Login"; // Importar el componente de Login
 import { Signup } from "./pages/Signup"; // Importar el componente de Signup
+import { Contacts } from "./pages/Contacts.jsx";
 
 const Layout = () => {
     const basename = process.env.BASENAME || "";
@@ -40,8 +41,9 @@ const Layout = () => {
                         <Route element={<DetailsCharacters />} path="/detailscharacters/:personaje" />
                         <Route element={<DetailsPlanets />} path="/detailsplanets/:planeta" />
                         <Route element={<DetailsStarships />} path="/detailsstarships/:nave" />
-                        <Route element={<Login />} path="/login" /> {/* Añadir ruta de Login */}
-                        <Route element={<Signup />} path="/signup" /> {/* Añadir ruta de Signup */}
+                        <Route element={<Contacts />} path="/contacts" /> {/* ruta de Contacts */}
+                        <Route element={<Login />} path="/login" /> {/* ruta de Login */}
+                        <Route element={<Signup />} path="/signup" /> {/* ruta de Signup */}
                         <Route element={<h1>Not found!</h1>} path="*" />
                     </Routes>
                     <Footer /> 

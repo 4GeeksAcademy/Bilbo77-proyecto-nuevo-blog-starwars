@@ -20,6 +20,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Fav: [],
 			currentUser: null,
 			isLogin: false,
+			apiContact: "https://playground.4geeks.com/contact/",
+			agenda: "Bilbo",
+			contacts: [],
 		},
 		actions: {
 			// Use getActions to call a function within a function
@@ -135,6 +138,44 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ isLogin: true, currentUser: data.results });
 				} catch (error) {
 					console.error("There has been a problem with your fetch operation:", error);
+				}
+			},
+			//Logica para contacts
+			getContacts: async () => {
+				const uri = `${getStore().apiContact}agendas/${getStore().agenda}/contacts`
+				const response = await fetch(uri);
+				if (!response.ok) {
+					console.log("Error", response.status, response.statusText);
+					return;
+				}
+				const data = await response.json();
+
+				console.log(data.contacts)
+				setStore({ contacts: data.contacts });
+			},
+
+			//Lógica para añadir contactos
+			addContact: async (contact) => {
+				const store = getStore();
+				const response = await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().agenda}/contacts`, {
+					method: "POST",
+					body: JSON.stringify(contact),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				});
+				if (response.ok) {
+					const newContact = await response.json();
+					setStore({ contacts: [...store.contacts, newContact] });
+				}
+			},
+			deleteContact: async (id) => {
+				const store = getStore();
+				const response = await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().agenda}/contacts/${id}`, {
+					method: "DELETE"
+				});
+				if (response.ok) {
+					setStore({ contacts: store.contacts.filter(contact => contact.id !== id) });
 				}
 			},
 		}
