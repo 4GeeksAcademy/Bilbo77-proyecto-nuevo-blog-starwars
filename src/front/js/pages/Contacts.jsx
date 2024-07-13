@@ -188,14 +188,14 @@ export const Contacts = () => {
                             <div className="modal-footer">
                                 <button
                                     type="button"
-                                    className="btn btn-danger"
+                                    className="btn btn-dark"
                                     data-bs-dismiss="modal"
                                 >
                                     Close
                                 </button>
                                 <button
                                     type="button"
-                                    className="btn btn-success"
+                                    className="btn btn-dark"
                                     onClick={handleSaveContact}
                                     data-bs-dismiss="modal"
                                 >
