@@ -18,9 +18,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Planets: [],
 			Starships: [],
 			Fav: [],
+			currentUser: null,
+			isLogin: false,
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
+			// Use getActions to call a function within a function
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -51,7 +53,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// De aquí en adelante es la lógica que está en flux
 				setStore({ Characters: data.results });
 			},
-			
 
 			getPlanets: async () => {
 				const uri = "https://swapi.dev/api" + "/planets"
@@ -66,6 +67,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// De aquí en adelante es la lógica que está en flux
 				setStore({ Planets: data.results });
 			},
+
 			getStarships: async () => {
 				const uri = "https://swapi.dev/api" + "/starships"
 				const response = await fetch(uri);
@@ -81,19 +83,60 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//Results[0].url
 
 			},
+
 			favorites: (newFav) => {
 				const store = getStore();
-				if(store.Fav.includes(newFav)) {
-					setStore({Fav: store.Fav.filter( (repeated) => repeated != newFav)}); //sacarlo si está repetido
+				if (store.Fav.includes(newFav)) {
+					setStore({ Fav: store.Fav.filter((repeated) => repeated != newFav) }); //sacarlo si está repetido
 				} else {
-					setStore({Fav:[...store.Fav, newFav]}); //añadirlo si no está a la lista que ya hay de favoritos
+					setStore({ Fav: [...store.Fav, newFav] }); //añadirlo si no está a la lista que ya hay de favoritos
 				}
 			},
 
 			changeColor: (pers) => {
 				const store = getStore();
 				return store.Fav.includes(pers);
-			}
+			},
+
+			login: async (email, password) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ email, password }),
+					});
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+					const data = await response.json();
+					localStorage.setItem("token", data.access_token);
+					setStore({ isLogin: true, currentUser: data.results });
+				} catch (error) {
+					console.error("There has been a problem with your fetch operation:", error);
+				}
+			},
+
+			signup: async (email, password) => {
+				try {
+					const response = await fetch(`${process.env.BACKEND_URL}/api/signup`, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({ email, password }),
+					});
+					if (!response.ok) {
+						throw new Error("Network response was not ok");
+					}
+					const data = await response.json();
+					localStorage.setItem("token", data.access_token);
+					setStore({ isLogin: true, currentUser: data.results });
+				} catch (error) {
+					console.error("There has been a problem with your fetch operation:", error);
+				}
+			},
 		}
 	};
 };
