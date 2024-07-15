@@ -178,6 +178,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ contacts: store.contacts.filter(contact => contact.id !== id) });
 				}
 			},
+			// Lógica para editar contactos
+			editContact: async (contact) => {
+				const store = getStore();
+				const response = await fetch(`https://playground.4geeks.com/contact/agendas/${store.agenda}/contacts/${contact.id}`, {
+					method: "PUT",
+					body: JSON.stringify(contact),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				});
+				if (response.ok) {
+					const updatedContact = await response.json();
+					setStore({
+						contacts: store.contacts.map(cont =>
+							cont.id === updatedContact.id ? updatedContact : cont
+						)
+					});
+				}
+			},
 		}
 	};
 };

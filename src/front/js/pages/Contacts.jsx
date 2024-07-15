@@ -15,9 +15,16 @@ export const Contacts = () => {
         address: ""
     });
 
+    const [editContact, setEditContact] = useState(null);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setNewContact({ ...newContact, [name]: value });
+    };
+
+    const handleEditChange = (e) => {
+        const { name, value } = e.target;
+        setEditContact({ ...editContact, [name]: value });
     };
 
     const handleSaveContact = () => {
@@ -25,11 +32,14 @@ export const Contacts = () => {
         setNewContact({ name: "", email: "", phone: "", address: "" });
     };
 
+    const handleUpdateContact = () => {
+        actions.editContact(editContact);
+        setEditContact(null);
+    };
+
     return (
         <div className="container text-center">
             <h1>Contacts for slug: {store.agenda}</h1>
-
-
 
             <ul className="list-group col-4 mx-auto mt-4 ">
                 {!store.contacts ? (
@@ -44,8 +54,12 @@ export const Contacts = () => {
                                 <span
                                     title="Edit"
                                     style={{ cursor: "pointer" }}
-                                    className="fs-5 text-primary">
-                                    <i class="fas fa-edit"></i>
+                                    className="fs-5 text-primary"
+                                    onClick={() => setEditContact(item)}
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editContactModal"
+                                >
+                                    <i className="fas fa-edit"></i>
                                 </span>
                                 <span
                                     title="Delete"
@@ -115,8 +129,8 @@ export const Contacts = () => {
                 data-bs-target="#addContactModal"
             >
                 Añadir contacto
-
             </button>
+            
             {/* Modal/Formulario para añadir contacto  */}
             <form onSubmit={handleChange}>
                 <div
@@ -206,6 +220,96 @@ export const Contacts = () => {
                     </div>
                 </div>
             </form>
+
+            {/* Modal/Formulario para editar contacto  */}
+            {editContact && (
+                <div
+                    className="modal fade"
+                    id="editContactModal"
+                    tabIndex="-1"
+                    aria-labelledby="editContactModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="editContactModalLabel">Edit Contact</h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    <div className="mb-3">
+                                        <label htmlFor="name" className="form-label">Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="name"
+                                            name="name"
+                                            value={editContact.name}
+                                            onChange={handleEditChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="email" className="form-label">Email</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            id="email"
+                                            name="email"
+                                            value={editContact.email}
+                                            onChange={handleEditChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="phone" className="form-label">Phone</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="phone"
+                                            name="phone"
+                                            value={editContact.phone}
+                                            onChange={handleEditChange}
+                                        />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="address" className="form-label">Address</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="address"
+                                            name="address"
+                                            value={editContact.address}
+                                            onChange={handleEditChange}
+                                        />
+                                    </div>
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-dark"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-dark"
+                                    onClick={handleUpdateContact}
+                                    data-bs-dismiss="modal"
+                                >
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
